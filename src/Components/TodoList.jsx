@@ -28,7 +28,14 @@ const TodoList = () => {
     const handleListInputChange = (index, value) => {
         setListInputs({ ...listInputs, [index]: value }); // Update the listInputs state for the corresponding index
     };
-
+    const handleDeleteTodo = (index) => {
+        // Create a shallow copy of the current todos array
+        const newTodos = [...todos];
+        // Remove the todo at the specified index
+        newTodos.splice(index, 1);
+        // Update the state with the new array (without the deleted todo)
+        setTodos(newTodos);
+    };
 
     return (
         <div className="todo-container">
@@ -52,9 +59,7 @@ const TodoList = () => {
                     <div key={index} className="todo-card">
                         <div className="heading_todo">
                             <h3>{todo.heading}</h3>
-                            <button className="delete-button-heading">
-                                Delete Heading
-                            </button>
+                            <button className="delete-button-heading" onClick={handleDeleteTodo}>Delete Heading</button>
                         </div>
                         <div className='add_list'>
                             {/* Input field for adding a new item under a specific heading */}
